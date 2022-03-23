@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DapperApp.Library1\DapperApp.Library1.csproj" />
+  </ItemGroup>
+
 </Project>
