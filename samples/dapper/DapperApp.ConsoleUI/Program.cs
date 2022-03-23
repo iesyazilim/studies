@@ -10,6 +10,8 @@ namespace DapperApp.ConsoleUI
 
         static void Main(string[] args)
         {
+            //https://github.com/btkacademy/csharp-basic
+            //https://github.com/btkacademy/design-patterns
             //https://www.learndapper.com
             CreatePerson();
             WritePersonList();
@@ -41,5 +43,6 @@ namespace DapperApp.ConsoleUI
         }
 
         //Update, Delete methodları yazılacak
+        //Filtreli listeleme yapılabilir (Adı x ile başlayanları listelesin gibi ...)
     }
 }
