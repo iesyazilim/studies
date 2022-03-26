@@ -6,7 +6,7 @@ using DapperApp.Library1.Models;
 
 namespace DapperApp.Library1.Queries
 {
-    public class PersonQueries : ConnectionFactory
+    public class PersonQueries : ConnectionFactory, IPersonQueries
     {
         public List<Person> GetPersons()
         {
@@ -26,12 +26,32 @@ namespace DapperApp.Library1.Queries
             {
                 var insertedId = connection.ExecuteScalar<int>(@"insert into Persons values (@name,@surname) select SCOPE_IDENTITY()",
                     new
-                     {
-                         name = person.Name,
-                         surname = person.Surname
-                     });
+                    {
+                        name = person.Name,
+                        surname = person.Surname
+                    });
 
                 person.Id = insertedId;
+            });
+        }
+
+        public Person Get(int id)
+        {
+            Person person = null;
+            RunCommand((connection) =>
+            {
+                person = connection.QueryFirstOrDefault<Person>("select * from Persons where Id = @id", new { id });
+            });
+
+            return person;
+        }
+
+        public void Delete(int id)
+        {
+            //Check used modules
+            RunCommand((connection) =>
+            {
+                connection.Execute("delete from Persons where Id = @id", new { id });
             });
         }
     }
