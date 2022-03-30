@@ -9,7 +9,8 @@ namespace DapperApp.Library1.Queries
     {
         List<Person> GetPersons();
         void CreatePerson(Person person);
-        Person Get(int id);
+        Person Find(int id);
         void Delete(int id);
+        void Update(int id,string name,string surname);
     }
 }

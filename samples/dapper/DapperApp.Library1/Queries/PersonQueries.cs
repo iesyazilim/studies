@@ -35,23 +35,31 @@ namespace DapperApp.Library1.Queries
             });
         }
 
-        public Person Get(int id)
+        public Person Find(int id)
         {
-            Person person = null;
+           Person person= null;
             RunCommand((connection) =>
             {
-                person = connection.QueryFirstOrDefault<Person>("select * from Persons where Id = @id", new { id });
+                person = connection.QuerySingle<Person>($"select * from Persons where Persons.Id={id}");
             });
-
             return person;
         }
 
         public void Delete(int id)
         {
-            //Check used modules
+
             RunCommand((connection) =>
             {
-                connection.Execute("delete from Persons where Id = @id", new { id });
+                connection.Query<Person>($"DELETE FROM Persons WHERE Id = {id}");
+
+            });
+        }
+
+        public void Update(int id, string name, string surname)
+        {
+            RunCommand((connection) =>
+            {
+                connection.Query<Person>($"Update Persons Set Name = '{name}',Surname = '{surname}' where Id={id}");
             });
         }
     }
